@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Header} from './Header';
 import {Home} from './Home';
+import {BoardSize} from './BoardSize';
 import '../App.css';
 
 
@@ -16,12 +17,12 @@ const StyledScreen = styled.div`
 `
 
 const App = () => {
-  return (
-      <StyledScreen>
-          <Header/>
-          <Home/>
-      </StyledScreen>
-  )
+    return (
+        <StyledScreen>
+            <Header/>
+            <Home/>
+        </StyledScreen>
+    )
 }
 
 export default App;
