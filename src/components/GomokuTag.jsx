@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Routes, Route, Link } from "react-router-dom";
 
 const StyledGomokuTag = styled.div`
     width: 20%;
@@ -19,7 +20,7 @@ const StyledGomokuTag = styled.div`
 export const GomokuTag = () => (
     <StyledGomokuTag>
         <span>
-            Gomoku
+        <Link to="/">Gomoku</Link>
         </span>
     </StyledGomokuTag>
 )

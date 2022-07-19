@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BoardSize} from './BoardSize';
-import { Routes, Route, Link } from "react-router-dom";
+
 
 const StyledContainer = styled.div`
     width: 30%;
@@ -10,7 +9,7 @@ const StyledContainer = styled.div`
     position: relative;
 `
 
-const StartButton = styled.button`
+const LoginButton = styled.button`
     width: 100%;
     height: 10%;
     text-align: center;
@@ -20,7 +19,7 @@ const StartButton = styled.button`
     align-items: center;
     position: absolute;
     bottom: 0;
-    > Link {
+    > span {
         font-size: 1vw;
         display: inline-block;
         vertical-align: middle;
@@ -32,16 +31,12 @@ const StartButton = styled.button`
 `
 
 
-export const Home = ({boardSize, loggedIn, setBoardSize, setStartClicked, startClicked}) => {
-    
-    return (
-        <StyledContainer>
-            <BoardSize setBoardSize = {setBoardSize}/>
-            <StartButton>
-                <Link to={!loggedIn ? '/login' : '/game'}>
-                    Start
-                </Link>
-            </StartButton>
-        </StyledContainer>
-    )
-    }
+export const Login = () => (
+    <StyledContainer>
+        <LoginButton>
+            <span>
+                Login
+            </span>
+        </LoginButton>
+    </StyledContainer>
+)
