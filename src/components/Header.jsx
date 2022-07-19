@@ -14,7 +14,7 @@ const StyledHeader = styled.div`
 export const Header = ({isLoggedIn}) => (
         <StyledHeader> 
             <GomokuTag/>
-            <HeaderButton text={'Login'}/>
-            <HeaderButton text={'Previous Games'}/>
+            <HeaderButton text={'Login'} endpoint={'login'}/>
+            <HeaderButton text={'Previous Games'} endpoint = {'games'}/>
         </StyledHeader>
     )

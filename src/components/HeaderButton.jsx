@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const StyledHeaderButton = styled.div`
     width: 10%;
@@ -10,7 +11,7 @@ const StyledHeaderButton = styled.div`
     justify-content: center;
     border: 1px solid black;
     align-items: center;
-    > span {
+    > Link {
         font-size: 1vw;
         display: inline-block;
         vertical-align: middle;
@@ -18,10 +19,10 @@ const StyledHeaderButton = styled.div`
     }
 `
 
-export const HeaderButton = ({text}) => (
+export const HeaderButton = ({text, endpoint}) => (
     <StyledHeaderButton>
-        <span>
-            {text}
-        </span>
+        <Link to={`/${endpoint}`}>
+                {text}
+        </Link>
     </StyledHeaderButton>
 )
