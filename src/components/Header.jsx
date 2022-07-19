@@ -11,7 +11,7 @@ const StyledHeader = styled.div`
     align-items: center;
 `
 
-export const Header = () => (
+export const Header = ({isLoggedIn}) => (
         <StyledHeader> 
             <GomokuTag/>
             <HeaderButton text={'Login'}/>

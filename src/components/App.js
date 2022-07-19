@@ -25,21 +25,35 @@ const MainScreen = styled.div`
     justify-content: center;
     align-items: center;
     border: 2px solid green;
-`
+`;
+
+const USER = 'admin';
+const PASS = 'admin';
 
 const App = () => {
 
     const [boardSize, updateBoardSize] = useState(null);
     const [loggedIn, updateLoggedIn] = useState(false);
     const [startClicked, updateStartClicked] = useState(false);
+    const [username, updateUsername] = useState('');
+    const [password, updatePassword] = useState('');
+
+
+    useEffect(() => {
+        updateLoggedIn(username === USER && password === PASS); 
+    }, [username, password])
+
+    const setUsername = (e) => {
+        updateUsername(e.target.value)
+    };
+
+    const setPassword = (e) => {
+        updatePassword(e.target.value)
+    };
 
     const setBoardSize = (e) => updateBoardSize(e.value);
 
     const setStartClicked = _ => updateStartClicked(true);
-
-    const login = user => pass => {
-        updateLoggedIn(user === pass && pass === 'admin')
-    };
 
     return (
         <StyledScreen>
@@ -57,7 +71,13 @@ const App = () => {
                     }/>
                     <Route path="/login" element=
                     {
-                    <Login login = {login}/>
+                    <Login
+                        isValidLogin = {loggedIn}
+                        password = {password}
+                        username = {username}
+                        setPassword = {setPassword}
+                        setUsername = {setUsername}
+                        />
                     }/>
                     <Route path="/game" element=
                     {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Routes, Route, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 
@@ -7,6 +8,18 @@ const StyledContainer = styled.div`
     height: 40%;
     border: 1px solid black;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const StyledInput = styled.input`
+    width: 75%;
+    height: 10%;
+    justify-content: center;
+    border: 1px solid black;
+    align-items: center;
+    margin-top: 10%;
 `
 
 const LoginButton = styled.button`
@@ -31,12 +44,16 @@ const LoginButton = styled.button`
 `
 
 
-export const Login = () => (
-    <StyledContainer>
+export const Login = ({isValidLogin, username, password, setPassword, setUsername}) => {
+    return (
+        <StyledContainer>
+        <StyledInput value = {username} onChange = {setUsername} placeholder={'Username'}/>
+        <StyledInput value = {password} onChange = {setPassword} placeholder={'Password'}/>
         <LoginButton>
-            <span>
+            <Link to={isValidLogin ? '/' : '/login'}>
                 Login
-            </span>
+            </Link>
         </LoginButton>
     </StyledContainer>
-)
+    )
+}
