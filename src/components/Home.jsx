@@ -5,14 +5,13 @@ import {BoardSize} from './BoardSize';
 const StyledHome = styled.div`
     width: 100%;
     height: 85%;
-    background-color: green;
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 const StyledContainer = styled.div`
-    width: 40%;
+    width: 30%;
     height: 40%;
     border: 1px solid black;
     position: relative;
@@ -40,11 +39,11 @@ const StartButton = styled.button`
 `
 
 
-export const Home = () => (
+export const Home = ({setBoardSize, startClicked}) => (
     <StyledHome>
         <StyledContainer>
-            <BoardSize/>
-            <StartButton>
+            <BoardSize setBoardSize = {setBoardSize}/>
+            <StartButton onClick = {startClicked}>
                 <span>
                     Start
                 </span>
