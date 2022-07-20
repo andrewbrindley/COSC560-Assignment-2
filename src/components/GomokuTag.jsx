@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StyledGomokuTag = styled.div`
     width: 20%;

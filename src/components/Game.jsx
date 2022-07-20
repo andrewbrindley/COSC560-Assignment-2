@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import {Tile} from './Tile';
+import {getTurn} from '../game';
 
 
 const StyledContainer = styled.div`
@@ -44,13 +46,14 @@ const StyledButton = styled.button`
 
 
 
-export const Game = ({grid, tileClicked}) => {
+export const Game = ({grid, resetGame, tileClicked, winner}) => {
 
-    const count = grid.reduce((a, v) => a + (v < 0 ? 0 : !v ? -1 : 1), 0);
-    const isWhite = count % 2;
+    const turn = getTurn(grid);
     const isDraw = grid.every(x => x > -1);
-
-    const title = isDraw ? 'Draw' : `Current Player: ${isWhite ? 'White' : 'Black'}`;
+    const isWinner = winner > -1;
+    const title = isWinner ? (!winner ? 'Black Wins': 'White Wins')
+                           : isDraw ? 'Draw' 
+                           : `Current Player: ${turn ? 'White' : 'Black'}`;
 
     return (
         <StyledContainer>
@@ -62,11 +65,13 @@ export const Game = ({grid, tileClicked}) => {
             </StyledGame>
 
             <StyledButtons>
-                <StyledButton>
+                <StyledButton onClick = {resetGame}>
                     Restart
                 </StyledButton>
                 <StyledButton>
+                <Link to={isDraw | isWinner ? '/games' : '/'}>
                     Leave
+                </Link>
                 </StyledButton>
             </StyledButtons>
         </StyledContainer>

@@ -5,6 +5,8 @@ import {Header} from './Header';
 import {Home} from './Home';
 import {Login} from './Login';
 import {Game} from './Game';
+import {PreviousGames} from './PreviousGames';
+import {findPaths, getTurn} from '../game';
 import '../App.css';
 
 
@@ -30,10 +32,6 @@ const MainScreen = styled.div`
 const USER = 'admin';
 const PASS = 'admin';
 
-const STATUS = {
-    DRAW: 'DRAW',
-}
-
 const App = () => {
 
     const [boardSize, updateBoardSize] = useState(null);
@@ -42,7 +40,8 @@ const App = () => {
     const [username, updateUsername] = useState('admin');
     const [password, updatePassword] = useState('admin');
     const [grid, updateGrid] = useState([]);
-    const [turn, setTurn] = useState(0);
+    const [winner, updateWinner] = useState(-1);
+    const [moves, updateMoves] = useState([]);
 
     useEffect(() => {
         updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
@@ -52,19 +51,36 @@ const App = () => {
         updateLoggedIn(username === USER && password === PASS); 
     }, [username, password]);
 
-    const nextTurn = () => {
-        setTurn(turn => (turn + 1) % 2);
+    const resetGame = () => {
+        updateGrid(grid => [...grid].map(_ => -1));
+        updateWinner(-1);
+        updateMoves(_ => []);
+    };
+
+    const addGameToLocalStorage = (turn) => {
+        const items = Object.entries(localStorage);
+        const key = items.length;
+        const value = [moves, turn, new Date()]
+        localStorage.setItem(key, JSON.stringify(value));
     }
 
     const tileClicked = (i) => {
-        if (grid[i] < 0){
+        if (grid[i] < 0 && winner < 0){
             placeTile(i);
         }
     };
 
     const placeTile = (i) => {
-        updateGrid([...grid].map((v, j) => j !== i ? v : turn));
-        nextTurn();
+        const turn = getTurn(grid);
+        updateMoves(m => [...m, [i, turn]]);
+        const newGrid = [...grid].map((v, j) => j !== i ? v : turn);
+        const [x, y] = [Math.floor(i / boardSize), i % boardSize];
+        const paths = findPaths(newGrid, turn, x, y);
+        if (paths.length){
+            updateWinner(turn);
+            addGameToLocalStorage(turn);
+        }
+        return updateGrid(newGrid);
     }
 
     const setUsername = (e) => {
@@ -105,7 +121,16 @@ const App = () => {
                     }/>
                     <Route path="/game" element=
                     {
-                    <Game grid={grid} tileClicked = {tileClicked}/>
+                    <Game 
+                    grid={grid} 
+                    resetGame = {resetGame}
+                    tileClicked = {tileClicked}
+                    winner = {winner}
+                    />
+                    }/>
+                    <Route path="/games" element=
+                    {
+                    <PreviousGames/>
                     }/>
                 </Routes>
             </MainScreen>
