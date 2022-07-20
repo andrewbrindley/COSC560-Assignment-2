@@ -5,7 +5,7 @@ import {Tile} from './Tile';
 import {getTurn} from '../game';
 
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
     width: 35%;
     height: 75%;
     border: 2px solid purple;
@@ -16,7 +16,7 @@ const StyledContainer = styled.div`
     justify-content: center;
 `;
 
-const StyledGame = styled.div`
+export const StyledGame = styled.div`
     width: 75%;
     height: 85%;
     border: 1px solid black;

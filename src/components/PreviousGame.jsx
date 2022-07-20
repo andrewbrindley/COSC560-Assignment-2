@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Game } from './Game';
+import { Link } from "react-router-dom";
 
 const StyledPreviousGame = styled.div`
     width: 75%;
     height: 8%;
     max-height: 20%;
     border: 1px solid black;
-    margin-top: 10%;
-    margin-bottom: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +21,7 @@ const GameLogButton = styled.button`
 
 export const PreviousGame = ({game}) => {
     const [key, value] = game;
-    const [moves, turn, date] = JSON.parse(value);
+    const [moves, turn, date, boardSize] = JSON.parse(value);
     const dateString = date.split('T')[0].split('-').join`/`;
 
     //const [moves, winner, date] = JSON.parse(game);
@@ -33,7 +31,9 @@ export const PreviousGame = ({game}) => {
         <StyledPreviousGame>
             {`Game #${key}: @${dateString} Winner: ${!turn ? 'Black' : 'White'}`}
             <GameLogButton>
-                View game log
+                <Link to={`/game-log:${key}`}>
+                    Game Log
+                </Link>
             </GameLogButton>
         </StyledPreviousGame>
     )

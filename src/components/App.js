@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams} from "react-router-dom";
 import styled from 'styled-components';
 import {Header} from './Header';
 import {Home} from './Home';
@@ -7,6 +7,7 @@ import {Login} from './Login';
 import {Game} from './Game';
 import {PreviousGames} from './PreviousGames';
 import {findPaths, getTurn} from '../game';
+import {Replay} from './Replay';
 import '../App.css';
 
 
@@ -60,7 +61,7 @@ const App = () => {
     const addGameToLocalStorage = (turn) => {
         const items = Object.entries(localStorage);
         const key = items.length;
-        const value = [moves, turn, new Date()]
+        const value = [moves, turn, new Date(), boardSize]
         localStorage.setItem(key, JSON.stringify(value));
     }
 
@@ -131,6 +132,10 @@ const App = () => {
                     <Route path="/games" element=
                     {
                     <PreviousGames/>
+                    }/>
+                    <Route path="/game-log:id" element=
+                    {
+                    <Replay/>
                     }/>
                 </Routes>
             </MainScreen>
