@@ -81,7 +81,7 @@ const App = () => {
                     }/>
                     <Route path="/game" element=
                     {
-                    <Game/>
+                    <Game n={boardSize}/>
                     }/>
                 </Routes>
             </MainScreen>
