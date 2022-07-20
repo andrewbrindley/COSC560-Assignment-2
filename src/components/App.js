@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import styled from 'styled-components';
 import {Header} from './Header';
 import {Home} from './Home';
@@ -30,22 +30,42 @@ const MainScreen = styled.div`
 const USER = 'admin';
 const PASS = 'admin';
 
+const STATUS = {
+    DRAW: 'DRAW',
+}
+
 const App = () => {
 
     const [boardSize, updateBoardSize] = useState(null);
     const [loggedIn, updateLoggedIn] = useState(false);
     const [startClicked, updateStartClicked] = useState(false);
-    const [username, updateUsername] = useState('');
-    const [password, updatePassword] = useState('');
+    const [username, updateUsername] = useState('admin');
+    const [password, updatePassword] = useState('admin');
     const [grid, updateGrid] = useState([]);
+    const [turn, setTurn] = useState(0);
 
     useEffect(() => {
         updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
-    }, [boardSize])
+    }, [boardSize]);
 
     useEffect(() => {
         updateLoggedIn(username === USER && password === PASS); 
-    }, [username, password])
+    }, [username, password]);
+
+    const nextTurn = () => {
+        setTurn(turn => (turn + 1) % 2);
+    }
+
+    const tileClicked = (i) => {
+        if (grid[i] < 0){
+            placeTile(i);
+        }
+    };
+
+    const placeTile = (i) => {
+        updateGrid([...grid].map((v, j) => j !== i ? v : turn));
+        nextTurn();
+    }
 
     const setUsername = (e) => {
         updateUsername(e.target.value);
@@ -85,7 +105,7 @@ const App = () => {
                     }/>
                     <Route path="/game" element=
                     {
-                    <Game grid={grid}/>
+                    <Game grid={grid} tileClicked = {tileClicked}/>
                     }/>
                 </Routes>
             </MainScreen>
