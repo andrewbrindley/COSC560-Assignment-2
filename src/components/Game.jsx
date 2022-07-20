@@ -25,10 +25,9 @@ export const StyledGame = styled.div`
     grid-template-columns: repeat(${p => p.n}, 1fr);
 `;
 
-const StyledButtons = styled.div`
+export const StyledButtons = styled.div`
     width: 75%;
     height: 10%;
-    border: 2px solid orange;
     margin-top: 5%;
     margin-bottom: 5%;
     display: flex;
@@ -36,12 +35,15 @@ const StyledButtons = styled.div`
     align-items: center;
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
     width: 20%;
     height: 50%;
     border-radius: 10%;
     display: table-cell;
     vertical-align: middle;
+    &: hover{
+        cursor: pointer;
+    }
 `
 
 

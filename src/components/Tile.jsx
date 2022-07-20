@@ -18,15 +18,19 @@ const StyledTile = styled.div`
             background-color: white;
         }
     }
+    & > span{
+        
+    }
 `;
 
-export const Tile = ({tileClicked, value}) => {
+export const Tile = ({tileClicked, index, value, replay}) => {
 
     const colour = !value ? 'black' : 'white';
 
     return( 
         <StyledTile onClick={tileClicked}>
-            {value < 0 ? null : <div className={colour}/>}
+            {replay ? <span> {index} </span> : 
+            value < 0 ? null : <div className={colour}/>}
         </StyledTile>
     )
 }

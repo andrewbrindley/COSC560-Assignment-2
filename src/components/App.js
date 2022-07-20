@@ -43,6 +43,7 @@ const App = () => {
     const [grid, updateGrid] = useState([]);
     const [winner, updateWinner] = useState(-1);
     const [moves, updateMoves] = useState([]);
+    const [prevGame, updatePrevGame] = useState(null);
 
     useEffect(() => {
         updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
@@ -58,7 +59,7 @@ const App = () => {
         updateMoves(_ => []);
     };
 
-    const addGameToLocalStorage = (turn) => {
+    const addGameToLocalStorage = (turn, moves) => {
         const items = Object.entries(localStorage);
         const key = items.length;
         const value = [moves, turn, new Date(), boardSize]
@@ -73,14 +74,15 @@ const App = () => {
 
     const placeTile = (i) => {
         const turn = getTurn(grid);
-        updateMoves(m => [...m, [i, turn]]);
+        const newMoves = [...moves, [i, turn]]
         const newGrid = [...grid].map((v, j) => j !== i ? v : turn);
         const [x, y] = [Math.floor(i / boardSize), i % boardSize];
         const paths = findPaths(newGrid, turn, x, y);
         if (paths.length){
             updateWinner(turn);
-            addGameToLocalStorage(turn);
+            addGameToLocalStorage(turn, newMoves);
         }
+        updateMoves(newMoves);
         return updateGrid(newGrid);
     }
 
@@ -135,7 +137,7 @@ const App = () => {
                     }/>
                     <Route path="/game-log:id" element=
                     {
-                    <Replay/>
+                    <Replay setPrevGame={(key) => updatePrevGame(key)}/>
                     }/>
                 </Routes>
             </MainScreen>

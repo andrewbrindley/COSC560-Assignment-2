@@ -6,7 +6,7 @@ export const getTurn = (grid) => {
     return count % 2 ? 1 : 0;
 }
 
-const group = (grid, n) => {
+export const group = (grid, n) => {
     return !grid.length ? [] : [grid.slice(0, n), ...group(grid.slice(n), n)];
 }
 
