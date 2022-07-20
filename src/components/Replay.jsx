@@ -31,11 +31,16 @@ const ReplayButtons = styled.div`
     justify-content: center;
 `
 
+const ReplayButton = styled.div`
+    width: 25%;
+    height: 100%;
+    border: 1px solid black;
+`
+
 
 export const Replay = ({setPrevGame}) => {
     const { id } = useParams()
     const key = id.slice(1);
-    setPrevGame(key);
     const data = localStorage.getItem(key);
     const [moves, turn, date, boardSize] = JSON.parse(data);
 
@@ -69,7 +74,12 @@ export const Replay = ({setPrevGame}) => {
                         )
                     })}
                 </StyledReplayer>
-                <ReplayButtons/>
+                <ReplayButtons>
+                    <ReplayButton/>
+                    <ReplayButton/>
+                    <ReplayButton/>
+                    <ReplayButton/>
+                </ReplayButtons>
             </ReplayContainer>
         </React.Fragment>
     )

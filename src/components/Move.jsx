@@ -36,7 +36,7 @@ const StyledMove = styled.div`
 
 export const Move = ({index, black, white}) => {
     const blackI = black[0];
-    const whiteI = white[0];
+    const whiteI = white && white[0] || null;
     return (
         <StyledMoveContainer>
             <MoveIndex>
