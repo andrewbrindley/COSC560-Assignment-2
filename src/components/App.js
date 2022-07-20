@@ -37,18 +37,22 @@ const App = () => {
     const [startClicked, updateStartClicked] = useState(false);
     const [username, updateUsername] = useState('');
     const [password, updatePassword] = useState('');
+    const [grid, updateGrid] = useState([]);
 
+    useEffect(() => {
+        updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
+    }, [boardSize])
 
     useEffect(() => {
         updateLoggedIn(username === USER && password === PASS); 
     }, [username, password])
 
     const setUsername = (e) => {
-        updateUsername(e.target.value)
+        updateUsername(e.target.value);
     };
 
     const setPassword = (e) => {
-        updatePassword(e.target.value)
+        updatePassword(e.target.value);
     };
 
     const setBoardSize = (e) => updateBoardSize(e.value);
@@ -81,7 +85,7 @@ const App = () => {
                     }/>
                     <Route path="/game" element=
                     {
-                    <Game n={boardSize}/>
+                    <Game grid={grid}/>
                     }/>
                 </Routes>
             </MainScreen>

@@ -24,10 +24,10 @@ const StyledGame = styled.div`
 
 
 
-export const Game = ({n}) => (
+export const Game = ({grid}) => (
     <StyledContainer>
-        <StyledGame n={n}>
-            {[...Array(n*n)].map(_ => <Tile/>)}
+        <StyledGame n={Math.sqrt(grid.length)}>
+            {grid.map(_ => <Tile/>)}
         </StyledGame>
     </StyledContainer>
 )
