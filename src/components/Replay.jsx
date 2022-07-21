@@ -79,22 +79,27 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                     {movePairs.map((move, index) => {
                         const [black, white] = move;
                         return (
-                            <Move index={index} black={black} white={white} replayIndex = {replayIndex}>
+                            <Move 
+                                index={index} 
+                                black={black} 
+                                white={white} 
+                                replayIndex = {replayIndex} 
+                                setReplayIndex = {setReplayIndex}>
                             </Move>
                         )
                     })}
                 </StyledReplayer>
                 <ReplayButtons>
-                    <ReplayButton onClick={() => setReplayIndex(moves, -Infinity)}>
+                    <ReplayButton onClick={() => setReplayIndex(-1)}>
                         <KeyboardDoubleArrowLeftOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setReplayIndex(moves, -1)}>
+                    <ReplayButton onClick={() => setReplayIndex(Math.max(-1, replayIndex - 1))}>
                         <KeyboardArrowLeftOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setReplayIndex(moves, 1)}>
+                    <ReplayButton onClick={() => setReplayIndex(Math.min(moves.length-1, replayIndex+1))}>
                         <KeyboardArrowRightOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setReplayIndex(moves, Infinity)}>
+                    <ReplayButton onClick={() => setReplayIndex(moves.length - 1)}>
                         <KeyboardDoubleArrowRightOutlinedIcon/>
                     </ReplayButton>
                 </ReplayButtons>

@@ -86,8 +86,8 @@ const App = () => {
         return updateGrid(newGrid);
     };
 
-    const setReplayIndex = (moves, d) => {
-        updateReplayIndex(i => d < 0 ? Math.max(-1, i + d) : Math.min(moves.length, i + d));
+    const setReplayIndex = (index) => {
+        updateReplayIndex(index);
     }
 
     const setUsername = (e) => {
