@@ -108,12 +108,12 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                         <KeyboardArrowLeftOutlinedIcon/>
                     </ReplayButton>
                     <ReplayButton 
-                                   disabled = {replayIndex >= moves.length}
+                                   disabled = {replayIndex >= moves.length-1}
                                    onClick={() => setReplayIndex(Math.min(moves.length-1, replayIndex+1))}>
                         <KeyboardArrowRightOutlinedIcon/>
                     </ReplayButton>
                     <ReplayButton 
-                                    disabled = {replayIndex >= moves.length}
+                                    disabled = {replayIndex >= moves.length-1}
                                     onClick={() => setReplayIndex(moves.length - 1)}>
                         <KeyboardDoubleArrowRightOutlinedIcon/>
                     </ReplayButton>
