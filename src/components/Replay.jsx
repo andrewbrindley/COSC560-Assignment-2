@@ -13,7 +13,7 @@ import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDo
 const ReplayContainer = styled.div`
     height: 75%;
     width: 20%;
-    border: 3px solid black;
+    border: 1px solid black;
     margin-left: 2%;
 `
 
@@ -49,7 +49,7 @@ const ReplayButton = styled.button`
 `
 
 
-export const Replay = ({index, setIndex}) => {
+export const Replay = ({replayIndex, setReplayIndex}) => {
     const { id } = useParams()
     const key = id.slice(1);
     const data = localStorage.getItem(key);
@@ -79,22 +79,22 @@ export const Replay = ({index, setIndex}) => {
                     {movePairs.map((move, index) => {
                         const [black, white] = move;
                         return (
-                            <Move index={index} black={black} white={white}>
+                            <Move index={index} black={black} white={white} replayIndex = {replayIndex}>
                             </Move>
                         )
                     })}
                 </StyledReplayer>
                 <ReplayButtons>
-                    <ReplayButton onClick={() => setIndex(moves, -Infinity)}>
+                    <ReplayButton onClick={() => setReplayIndex(moves, -Infinity)}>
                         <KeyboardDoubleArrowLeftOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setIndex(moves, -1)}>
+                    <ReplayButton onClick={() => setReplayIndex(moves, -1)}>
                         <KeyboardArrowLeftOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setIndex(moves, 1)}>
+                    <ReplayButton onClick={() => setReplayIndex(moves, 1)}>
                         <KeyboardArrowRightOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setIndex(moves, Infinity)}>
+                    <ReplayButton onClick={() => setReplayIndex(moves, Infinity)}>
                         <KeyboardDoubleArrowRightOutlinedIcon/>
                     </ReplayButton>
                 </ReplayButtons>

@@ -15,7 +15,6 @@ const MoveIndex = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid black;
     > span{
         font-size: 1vw;
         display: inline-block;
@@ -28,15 +27,23 @@ const MoveIndex = styled.div`
 const StyledMove = styled.div`
     width: 40%;
     height: 100%;
-    border-right: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: ${p => p.current ? '#7EC8E3' : 'white'};
+    &: hover{
+        cursor: pointer;
+        background-color: #055C9D;
+        color: white;
+    }
 `
 
-export const Move = ({index, black, white}) => {
+export const Move = ({index, black, white, replayIndex}) => {
     const blackI = black[0];
     const whiteI = white && white[0] || null;
+
+    const current = (index * 2);
+
     return (
         <StyledMoveContainer>
             <MoveIndex>
@@ -44,10 +51,10 @@ export const Move = ({index, black, white}) => {
                     {index}
                 </span>
             </MoveIndex>
-            <StyledMove>
+            <StyledMove current={current === replayIndex}>
                 {blackI}
             </StyledMove>
-            <StyledMove>
+            <StyledMove current={(current+1) === replayIndex}>
                 {whiteI}
             </StyledMove>
         </StyledMoveContainer>

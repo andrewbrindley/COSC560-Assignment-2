@@ -43,7 +43,7 @@ const App = () => {
     const [grid, updateGrid] = useState([]);
     const [winner, updateWinner] = useState(-1);
     const [moves, updateMoves] = useState([]);
-    const [index, updateIndex] = useState(-1);
+    const [replayIndex, updateReplayIndex] = useState(-1);
 
     useEffect(() => {
         updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
@@ -86,8 +86,8 @@ const App = () => {
         return updateGrid(newGrid);
     };
 
-    const setIndex = (moves, d) => {
-        updateIndex(i => d < 0 ? Math.max(-1, i + d) : Math.min(moves.length, i + d));
+    const setReplayIndex = (moves, d) => {
+        updateReplayIndex(i => d < 0 ? Math.max(-1, i + d) : Math.min(moves.length, i + d));
     }
 
     const setUsername = (e) => {
@@ -142,8 +142,8 @@ const App = () => {
                     <Route path="/game-log:id" element=
                     {
                     <Replay
-                        index = {index}
-                        setIndex = {setIndex}/>
+                        replayIndex = {replayIndex}
+                        setReplayIndex = {setReplayIndex}/>
                     }/>
                 </Routes>
             </MainScreen>
