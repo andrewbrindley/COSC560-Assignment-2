@@ -33,7 +33,7 @@ const StyledMove = styled.div`
     color: ${p => p.current ? 'white' : 'black'};
     &: hover{
         cursor: pointer;
-        background-color: ${p => p.current ? '#7EC8E3' : '#055C9D'};
+        background-color: ${p => p.current ? '#055C9D' : '#055C9D'};
         color: white;
     }
 `

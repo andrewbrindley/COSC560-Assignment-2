@@ -59,10 +59,10 @@ const App = () => {
         updateMoves(_ => []);
     };
 
-    const addGameToLocalStorage = (turn, moves) => {
+    const addGameToLocalStorage = (turn, moves, winner) => {
         const items = Object.entries(localStorage);
-        const key = items.length;
-        const value = [moves, turn, new Date(), boardSize]
+        const key = items.length + 1;
+        const value = [moves, turn, new Date(), boardSize, winner]
         localStorage.setItem(key, JSON.stringify(value));
     }
 
@@ -78,10 +78,14 @@ const App = () => {
         const newGrid = [...grid].map((v, j) => j !== i ? v : turn);
         const [x, y] = [Math.floor(i / boardSize), i % boardSize];
         const paths = findPaths(newGrid, turn, x, y);
-        if (paths.length){
-            updateWinner(turn);
-            addGameToLocalStorage(turn, newMoves);
-        }
+        const allTilesPlaced = !newGrid.some(x => x < 0);
+        const winner = paths.length ? turn : -1;
+        if (paths.length || allTilesPlaced){
+            if (paths.length) updateWinner(turn);
+            const winner = paths.length ? turn : -1;
+            addGameToLocalStorage(turn, newMoves, winner);
+        } 
+        updateWinner(winner);
         updateMoves(newMoves);
         return updateGrid(newGrid);
     };

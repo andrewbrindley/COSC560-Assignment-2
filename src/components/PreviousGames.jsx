@@ -15,7 +15,7 @@ export const PreviousGames = () => {
 
     return (
         <StyledPreviousGames>
-            {Object.entries(localStorage).sort().map(game => <PreviousGame game={game}/>)}
+            {Object.entries(localStorage).sort((a, b) => +a[0] - +b[0]).map(game => <PreviousGame game={game}/>)}
         </StyledPreviousGames>
     )
 }

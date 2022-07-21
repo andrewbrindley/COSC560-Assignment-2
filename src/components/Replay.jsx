@@ -60,15 +60,17 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
     const { id } = useParams()
     const key = id.slice(1);
     const data = localStorage.getItem(key);
-    const [moves, turn, date, boardSize] = JSON.parse(data);
+    const [moves, turn, date, boardSize, winner] = JSON.parse(data);
     const movePairs = group(moves, 2);
     const grid = applyMoves(moves, replayIndex, [...Array(boardSize * boardSize)].map(_ => -1));
+    const isDraw = winner < 0;
+    const gameOver = replayIndex === moves.length-1;
 
     return (
         <React.Fragment>
             <StyledContainer>
                 <h3>
-                    Current Player: Black
+                    {gameOver ? (isDraw ? 'Draw' : !winner ? 'Black Wins' : 'White Wins') : `Current Player: ${replayIndex % 2 ? 'Black' : 'White'}`}
                 </h3>
                 <StyledGame n={boardSize}>
                     {grid.map((x, i) => 
