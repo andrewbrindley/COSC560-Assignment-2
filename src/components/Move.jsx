@@ -20,7 +20,6 @@ const MoveIndex = styled.div`
         display: inline-block;
         vertical-align: middle;
         line-height: normal;
-        color: ;
     }
 `;
 
@@ -30,10 +29,11 @@ const StyledMove = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${p => p.current ? '#7EC8E3' : 'white'};
+    background-color: ${p => p.current ? '#6495ED' : 'white'};
+    color: ${p => p.current ? 'white' : 'black'};
     &: hover{
         cursor: pointer;
-        background-color: #055C9D;
+        background-color: ${p => p.current ? '#7EC8E3' : '#055C9D'};
         color: white;
     }
 `

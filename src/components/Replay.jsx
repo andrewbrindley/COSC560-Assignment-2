@@ -20,7 +20,6 @@ const ReplayContainer = styled.div`
 const StyledReplayer = styled.div`
     height: 90%;
     width: 100%;
-    margin-left: 2%;
     display: flex;
     flex-direction: column;
 `;
@@ -46,7 +45,15 @@ const ReplayButton = styled.button`
             color: white;
         }
     }
-`
+`;
+
+const applyMoves = (moves, replayIndex, grid) => {
+    moves.slice(0, replayIndex+1).forEach((move, i) => {
+        grid[move[0]] = move[1];
+    });
+    return grid;
+
+}
 
 
 export const Replay = ({replayIndex, setReplayIndex}) => {
@@ -55,7 +62,7 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
     const data = localStorage.getItem(key);
     const [moves, turn, date, boardSize] = JSON.parse(data);
     const movePairs = group(moves, 2);
-    const grid = [...Array(boardSize * boardSize)].map(_ => -1);
+    const grid = applyMoves(moves, replayIndex, [...Array(boardSize * boardSize)].map(_ => -1));
 
     return (
         <React.Fragment>
@@ -65,7 +72,7 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                 </h3>
                 <StyledGame n={boardSize}>
                     {grid.map((x, i) => 
-                    <Tile tileClicked={null} value={x} index={i} replay={true}>
+                    <Tile tileClicked={null} value={x} index={i} replay={false}>
                     </Tile>)}
                 </StyledGame>
                 <StyledButtons>
