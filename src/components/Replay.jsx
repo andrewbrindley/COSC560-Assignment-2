@@ -39,10 +39,10 @@ const ReplayButton = styled.button`
     justify-content: center;
     align-items: center;
     &: hover{
-        cursor: pointer;
-        background-color: #99ff99;
+        cursor: ${p => p.disabled ? 'auto' : 'pointer'};
+        background-color: ${p => p.disabled ? 'none' : '#99ff99'};
         > * {
-            color: white;
+            color: ${p => p.disabled ? 'none' : 'white'};
         }
     }
 `;
@@ -99,16 +99,22 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                     })}
                 </StyledReplayer>
                 <ReplayButtons>
-                    <ReplayButton onClick={() => setReplayIndex(-1)}>
+                    <ReplayButton disabled = {replayIndex < 0}
+                                  onClick={() => setReplayIndex(-1)}>
                         <KeyboardDoubleArrowLeftOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setReplayIndex(Math.max(-1, replayIndex - 1))}>
+                    <ReplayButton disabled = {replayIndex < 0}
+                                  onClick={() => setReplayIndex(Math.max(-1, replayIndex - 1))}>
                         <KeyboardArrowLeftOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setReplayIndex(Math.min(moves.length-1, replayIndex+1))}>
+                    <ReplayButton 
+                                   disabled = {replayIndex >= moves.length}
+                                   onClick={() => setReplayIndex(Math.min(moves.length-1, replayIndex+1))}>
                         <KeyboardArrowRightOutlinedIcon/>
                     </ReplayButton>
-                    <ReplayButton onClick={() => setReplayIndex(moves.length - 1)}>
+                    <ReplayButton 
+                                    disabled = {replayIndex >= moves.length}
+                                    onClick={() => setReplayIndex(moves.length - 1)}>
                         <KeyboardDoubleArrowRightOutlinedIcon/>
                     </ReplayButton>
                 </ReplayButtons>
