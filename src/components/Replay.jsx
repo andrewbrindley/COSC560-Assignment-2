@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {StyledButton, StyledButtons, StyledContainer, StyledGame} from './Game';
 import {Tile} from './Tile';
 import {group} from '../game';
@@ -85,7 +85,10 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                 </StyledGame>
                 <StyledButtons>
                     <StyledButton>
-                        Back
+                        <Link 
+                            to="/games">
+                                Back
+                        </Link>
                     </StyledButton>
                 </StyledButtons>
             </StyledContainer>
