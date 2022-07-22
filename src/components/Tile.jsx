@@ -13,14 +13,27 @@ const StyledTile = styled.div`
         border: 2px solid black;
         &.black{
             background-color: black;
+            > span {
+                color: white;
+            }
         }
         &.white{
             background-color: white;
+            > span {
+                color: black;
+            }
         }
-    }
-    & > span{
-        
-    }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        > span{
+            font-size: 1vw;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+        }
+    };
 `;
 
 export const Tile = ({tileClicked, index, value, replay}) => {
@@ -29,8 +42,10 @@ export const Tile = ({tileClicked, index, value, replay}) => {
 
     return( 
         <StyledTile onClick={tileClicked}>
-            {replay ? <span> {index} </span> : 
-            value < 0 ? null : <div className={colour}/>}
+            {value < 0 ? null : 
+            <div className={colour}>
+                {replay ? <span> {index} </span> : null}    
+            </div>}
         </StyledTile>
     )
 }

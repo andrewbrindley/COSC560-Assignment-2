@@ -66,6 +66,12 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
     const isDraw = winner < 0;
     const gameOver = replayIndex === moves.length-1;
 
+    const indices = moves.reduce((a, move, i) => {
+        const index = move[0];
+        a[index] = i;
+        return a;
+    }, {})
+
     return (
         <React.Fragment>
             <StyledContainer>
@@ -74,7 +80,7 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                 </h3>
                 <StyledGame n={boardSize}>
                     {grid.map((x, i) => 
-                    <Tile tileClicked={null} value={x} index={i} replay={false}>
+                    <Tile value={x} index={indices[i]} replay={true}>
                     </Tile>)}
                 </StyledGame>
                 <StyledButtons>
