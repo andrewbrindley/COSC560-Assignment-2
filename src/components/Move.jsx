@@ -39,12 +39,10 @@ const StyledMove = styled.div`
 `
 
 export const Move = ({index, black, white, replayIndex, setReplayIndex}) => {
-    const blackI = black[0];
-    const whiteI = white && white[0] || null;
 
     const blackIndex = (index * 2);
     const whiteIndex = blackIndex + 1;
-
+    
     return (
         <StyledMoveContainer>
             <MoveIndex>
@@ -54,12 +52,12 @@ export const Move = ({index, black, white, replayIndex, setReplayIndex}) => {
             </MoveIndex>
             <StyledMove onClick = {() => setReplayIndex(blackIndex)}
                         current={blackIndex === replayIndex}>
-                {blackI}
+                {blackIndex}
             </StyledMove>
-            {whiteI ? <StyledMove 
+            {white && white[0] || null ? <StyledMove 
                 onClick = {() => setReplayIndex(whiteIndex)}
                 current={whiteIndex === replayIndex}>
-                {whiteI}
+                {whiteIndex}
             </StyledMove> : null}
         </StyledMoveContainer>
     )

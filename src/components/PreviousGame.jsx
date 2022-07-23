@@ -23,10 +23,7 @@ export const PreviousGame = ({game}) => {
     const [key, value] = game;
     const [moves, turn, date, boardSize] = JSON.parse(value);
     const dateString = date.split('T')[0].split('-').join`/`;
-
-    //const [moves, winner, date] = JSON.parse(game);
-    //console.log(`Game ${key} was played on ${date}, and won by ${winner}. The moves were ${moves}.`);
-
+    
     return (
         <StyledPreviousGame>
             {`Game #${key}: @${dateString} Winner: ${!turn ? 'Black' : 'White'}`}

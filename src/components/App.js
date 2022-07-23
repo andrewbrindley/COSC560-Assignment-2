@@ -38,12 +38,14 @@ const App = () => {
     const [boardSize, updateBoardSize] = useState(null);
     const [loggedIn, updateLoggedIn] = useState(false);
     const [startClicked, updateStartClicked] = useState(false);
-    const [username, updateUsername] = useState('admin');
+    const [username, updateUsername] = useState('admi');
     const [password, updatePassword] = useState('admin');
     const [grid, updateGrid] = useState([]);
     const [winner, updateWinner] = useState(-1);
     const [moves, updateMoves] = useState([]);
     const [replayIndex, updateReplayIndex] = useState(-1);
+
+
 
     useEffect(() => {
         updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
@@ -64,7 +66,7 @@ const App = () => {
         const key = items.length + 1;
         const value = [moves, turn, new Date(), boardSize, winner]
         localStorage.setItem(key, JSON.stringify(value));
-    }
+    };
 
     const tileClicked = (i) => {
         if (grid[i] < 0 && winner < 0){
@@ -78,13 +80,7 @@ const App = () => {
         const newGrid = [...grid].map((v, j) => j !== i ? v : turn);
         const [x, y] = [Math.floor(i / boardSize), i % boardSize];
         const paths = findPaths(newGrid, turn, x, y);
-        const allTilesPlaced = !newGrid.some(x => x < 0);
         const winner = paths.length ? turn : -1;
-        if (paths.length || allTilesPlaced){
-            if (paths.length) updateWinner(turn);
-            const winner = paths.length ? turn : -1;
-            addGameToLocalStorage(turn, newMoves, winner);
-        } 
         updateWinner(winner);
         updateMoves(newMoves);
         return updateGrid(newGrid);
@@ -105,6 +101,8 @@ const App = () => {
     const setBoardSize = (e) => updateBoardSize(e.value);
 
     const setStartClicked = _ => updateStartClicked(true);
+
+    const gameOver = winner > -1 || grid.every(x => x > -1);
 
     return (
         <StyledScreen>
@@ -133,7 +131,10 @@ const App = () => {
                     <Route path="/game" element=
                     {
                     <Game 
+                    addGameToLocalStorage={addGameToLocalStorage}
+                    gameOver = {gameOver}
                     grid={grid} 
+                    moves = {moves}
                     resetGame = {resetGame}
                     tileClicked = {tileClicked}
                     winner = {winner}

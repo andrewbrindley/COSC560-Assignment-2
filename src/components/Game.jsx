@@ -48,7 +48,7 @@ export const StyledButton = styled.button`
 
 
 
-export const Game = ({grid, resetGame, tileClicked, winner}) => {
+export const Game = ({addGameToLocalStorage, gameOver, grid, moves, resetGame, tileClicked, winner}) => {
 
     const turn = getTurn(grid);
     const isDraw = grid.every(x => x > -1);
@@ -56,6 +56,7 @@ export const Game = ({grid, resetGame, tileClicked, winner}) => {
     const title = isWinner ? (!winner ? 'Black Wins': 'White Wins')
                            : isDraw ? 'Draw' 
                            : `Current Player: ${turn ? 'White' : 'Black'}`;
+
 
     return (
         <StyledContainer>
@@ -71,7 +72,13 @@ export const Game = ({grid, resetGame, tileClicked, winner}) => {
                     Restart
                 </StyledButton>
                 <StyledButton>
-                <Link to={isDraw | isWinner ? '/games' : '/'}>
+                <Link onClick = {() => {
+                    if (gameOver){
+                        addGameToLocalStorage(turn, moves, winner);
+                        resetGame();
+                    }}
+                    }    
+                      to={isDraw | isWinner ? '/games' : '/'}>
                     Leave
                 </Link>
                 </StyledButton>
