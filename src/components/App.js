@@ -41,11 +41,10 @@ const App = () => {
     const [username, updateUsername] = useState('admi');
     const [password, updatePassword] = useState('admin');
     const [grid, updateGrid] = useState([]);
-    const [winner, updateWinner] = useState(-1);
     const [moves, updateMoves] = useState([]);
     const [replayIndex, updateReplayIndex] = useState(-1);
-
-
+    const [lastPlayedTile, updateLastPlayedTile] = useState(-1);
+    const [paths, updatePaths] = useState([]);
 
     useEffect(() => {
         updateGrid([...Array(boardSize * boardSize)].map(_ => -1));
@@ -55,10 +54,29 @@ const App = () => {
         updateLoggedIn(username === USER && password === PASS); 
     }, [username, password]);
 
+    useEffect(() => {
+        if (lastPlayedTile > -1){
+            const turn = (getTurn(grid) + 1) % 2;
+            const i = lastPlayedTile;
+            const [x, y] = [Math.floor(i / boardSize), i % boardSize];
+            updatePaths([...findPaths(grid, turn, x, y)]);
+        } else {
+            updatePaths([]);
+            updateMoves([]);
+            updateGrid([]);
+        }
+    }, [lastPlayedTile]);
+
+
+    const isGameOver = () => {
+        return grid.length & lastPlayedTile > -1 && (paths.length || grid.every(x => x > -1));
+
+    }
+
     const resetGame = () => {
         updateGrid(grid => [...grid].map(_ => -1));
-        updateWinner(-1);
         updateMoves(_ => []);
+        updateLastPlayedTile(-1);
     };
 
     const addGameToLocalStorage = (turn, moves, winner) => {
@@ -69,21 +87,15 @@ const App = () => {
     };
 
     const tileClicked = (i) => {
-        if (grid[i] < 0 && winner < 0){
-            placeTile(i);
-        }
+        if (grid[i] < 0 && !isGameOver()) placeTile(i);
+        
     };
 
     const placeTile = (i) => {
         const turn = getTurn(grid);
-        const newMoves = [...moves, [i, turn]]
-        const newGrid = [...grid].map((v, j) => j !== i ? v : turn);
-        const [x, y] = [Math.floor(i / boardSize), i % boardSize];
-        const paths = findPaths(newGrid, turn, x, y);
-        const winner = paths.length ? turn : -1;
-        updateWinner(winner);
-        updateMoves(newMoves);
-        return updateGrid(newGrid);
+        updateMoves([...moves, [i, turn]]);
+        updateGrid([...grid].map((v, j) => j !== i ? v : turn));
+        updateLastPlayedTile(i);
     };
 
     const setReplayIndex = (index) => {
@@ -102,7 +114,10 @@ const App = () => {
 
     const setStartClicked = _ => updateStartClicked(true);
 
-    const gameOver = winner > -1 || grid.every(x => x > -1);
+
+    const gameOver = isGameOver();
+    const turn = getTurn(grid);
+    const winner = gameOver ? (turn + 1) % 2 : -1;
 
     return (
         <StyledScreen>

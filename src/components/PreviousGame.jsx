@@ -21,12 +21,12 @@ const GameLogButton = styled.button`
 
 export const PreviousGame = ({game}) => {
     const [key, value] = game;
-    const [moves, turn, date, boardSize] = JSON.parse(value);
+    const [moves, turn, date, boardSize, winner] = JSON.parse(value);
     const dateString = date.split('T')[0].split('-').join`/`;
     
     return (
         <StyledPreviousGame>
-            {`Game #${key}: @${dateString} Winner: ${!turn ? 'Black' : 'White'}`}
+            {`Game #${key}: @${dateString} Winner: ${winner < 0 ? 'Draw' : !winner ? 'Black' : 'White'}`}
             <GameLogButton>
                 <Link to={`/game-log:${key}`}>
                     Game Log
