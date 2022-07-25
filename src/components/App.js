@@ -60,16 +60,12 @@ const App = () => {
             const i = lastPlayedTile;
             const [x, y] = [Math.floor(i / boardSize), i % boardSize];
             updatePaths([...findPaths(grid, turn, x, y)]);
-        } else {
-            updatePaths([]);
-            updateMoves([]);
-            updateGrid([]);
         }
     }, [lastPlayedTile]);
 
 
     const isGameOver = () => {
-        return grid.length & lastPlayedTile > -1 && (paths.length || grid.every(x => x > -1));
+        return grid.length && lastPlayedTile > -1 && (paths.length || grid.every(x => x > -1));
 
     }
 
@@ -77,6 +73,7 @@ const App = () => {
         updateGrid(grid => [...grid].map(_ => -1));
         updateMoves(_ => []);
         updateLastPlayedTile(-1);
+        updatePaths([]);
     };
 
     const addGameToLocalStorage = (turn, moves, winner) => {
@@ -117,7 +114,8 @@ const App = () => {
 
     const gameOver = isGameOver();
     const turn = getTurn(grid);
-    const winner = gameOver ? (turn + 1) % 2 : -1;
+    const isDraw = grid.every(x => x > -1) && !paths.length;
+    const winner = (!gameOver || isDraw) ? -1 : (turn + 1) % 2;
 
     return (
         <StyledScreen>
@@ -148,7 +146,8 @@ const App = () => {
                     <Game 
                     addGameToLocalStorage={addGameToLocalStorage}
                     gameOver = {gameOver}
-                    grid={grid} 
+                    grid={grid}
+                    isDraw={isDraw} 
                     moves = {moves}
                     resetGame = {resetGame}
                     tileClicked = {tileClicked}

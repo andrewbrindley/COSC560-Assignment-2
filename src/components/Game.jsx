@@ -48,11 +48,10 @@ export const StyledButton = styled.button`
 
 
 
-export const Game = ({addGameToLocalStorage, gameOver, grid, moves, resetGame, tileClicked, winner}) => {
+export const Game = ({addGameToLocalStorage, isDraw, gameOver, grid, moves, resetGame, tileClicked, winner}) => {
 
     const turn = getTurn(grid);
-    const title = gameOver ? (winner < 0 ? 'Draw' : !winner ? 'Black Wins': 'White Wins')
-                           : `Current Player: ${turn ? 'White' : 'Black'}`;
+    const title = isDraw ? 'Draw' : (gameOver ? !winner ? 'Black Wins' : 'White Wins' : `Current Player: ${turn ? 'White' : 'Black'}`);
 
     return (
         <StyledContainer>

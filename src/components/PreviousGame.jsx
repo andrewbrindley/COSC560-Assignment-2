@@ -7,6 +7,7 @@ const StyledPreviousGame = styled.div`
     height: 8%;
     max-height: 20%;
     border: 1px solid black;
+    margin-top: 1%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,9 +25,12 @@ export const PreviousGame = ({game}) => {
     const [moves, turn, date, boardSize, winner] = JSON.parse(value);
     const dateString = date.split('T')[0].split('-').join`/`;
     
+    const isDraw = winner < 0;
+    const t = isDraw ? 'Draw' : `Winner: ${!winner ? 'Black' : 'White'}`
+    
     return (
         <StyledPreviousGame>
-            {`Game #${key}: @${dateString} Winner: ${winner < 0 ? 'Draw' : !winner ? 'Black' : 'White'}`}
+            {`Game #${key}: @${dateString} ${t}`}
             <GameLogButton>
                 <Link to={`/game-log:${key}`}>
                     Game Log
