@@ -27,7 +27,8 @@ const MainScreen = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid green;
+    border: 2px solid black;
+    background-color: #F5F5DC;
 `;
 
 const USER = 'admin';

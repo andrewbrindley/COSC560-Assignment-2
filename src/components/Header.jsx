@@ -9,6 +9,9 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    > * {
+        text-decoration: none;
+    }
 `
 
 export const Header = ({isLoggedIn}) => (

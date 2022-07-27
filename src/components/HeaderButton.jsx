@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 const StyledHeaderButton = styled.div`
     width: 10%;
     height: 20%;
-    border: 1px solid black;
     text-align: center;
     display: flex;
     justify-content: center;
-    border: 1px solid black;
     align-items: center;
     > Link {
         font-size: 1vw;
@@ -21,7 +19,7 @@ const StyledHeaderButton = styled.div`
 
 export const HeaderButton = ({text, endpoint}) => (
     <StyledHeaderButton>
-        <Link to={`/${endpoint}`}>
+        <Link style={{ textDecoration: 'none' }} to={`/${endpoint}`}>
                 {text}
         </Link>
     </StyledHeaderButton>
