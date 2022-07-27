@@ -86,6 +86,7 @@ export const Replay = ({replayIndex, setReplayIndex}) => {
                 <StyledButtons>
                     <StyledButton>
                         <Link 
+                            onClick={() => setReplayIndex(-1)}
                             to="/games">
                                 Back
                         </Link>
