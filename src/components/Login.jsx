@@ -44,13 +44,13 @@ const LoginButton = styled.button`
 `
 
 
-export const Login = ({isValidLogin, username, password, setPassword, setUsername}) => {
+export const Login = ({attemptLogIn, isValidLogin, username, password, setPassword, setUsername}) => {
     return (
         <StyledContainer>
         <StyledInput value = {username} onChange = {setUsername} placeholder={'Username'}/>
         <StyledInput value = {password} onChange = {setPassword} placeholder={'Password'}/>
         <LoginButton>
-            <Link to={isValidLogin ? '/' : '/login'}>
+            <Link onClick = {attemptLogIn} to='/'>
                 Login
             </Link>
         </LoginButton>

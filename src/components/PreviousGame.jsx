@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
 const StyledPreviousGame = styled.div`
-    width: 75%;
-    height: 8%;
-    max-height: 20%;
     border: 1px solid black;
-    margin-top: 1%;
     display: flex;
     align-items: center;
     justify-content: center;

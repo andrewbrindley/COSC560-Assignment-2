@@ -39,8 +39,8 @@ const App = () => {
     const [boardSize, updateBoardSize] = useState(null);
     const [loggedIn, updateLoggedIn] = useState(false);
     const [startClicked, updateStartClicked] = useState(false);
-    const [username, updateUsername] = useState('admi');
-    const [password, updatePassword] = useState('admin');
+    const [username, updateUsername] = useState('');
+    const [password, updatePassword] = useState('');
     const [grid, updateGrid] = useState([]);
     const [moves, updateMoves] = useState([]);
     const [replayIndex, updateReplayIndex] = useState(-1);
@@ -52,10 +52,6 @@ const App = () => {
     }, [boardSize]);
 
     useEffect(() => {
-        updateLoggedIn(username === USER && password === PASS); 
-    }, [username, password]);
-
-    useEffect(() => {
         if (lastPlayedTile > -1){
             const turn = (getTurn(grid) + 1) % 2;
             const i = lastPlayedTile;
@@ -64,6 +60,17 @@ const App = () => {
         }
     }, [lastPlayedTile]);
 
+
+    const logout = () => {
+        console.log('Log out');
+        updateUsername('');
+        updatePassword('');
+        updateLoggedIn(false);
+    }
+
+    const attemptLogIn = () => {
+        updateLoggedIn(username === USER && password === PASS)
+    }
 
     const isGameOver = () => {
         return grid.length && lastPlayedTile > -1 && (paths.length || grid.every(x => x > -1));
@@ -120,7 +127,7 @@ const App = () => {
 
     return (
         <StyledScreen>
-            <Header/>
+            <Header isLoggedIn={loggedIn} logout={logout}/>
             <MainScreen>
                 <Routes>
                 <Route path="/" element=
@@ -135,6 +142,7 @@ const App = () => {
                     <Route path="/login" element=
                     {
                     <Login
+                        attemptLogIn={attemptLogIn}
                         isValidLogin = {loggedIn}
                         password = {password}
                         username = {username}

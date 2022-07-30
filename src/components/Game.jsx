@@ -6,9 +6,9 @@ import {getTurn} from '../game';
 
 
 export const StyledContainer = styled.div`
-    width: 35%;
-    height: 75%;
-    border: 2px solid purple;
+    width: 40%;
+    height: 80%;
+    border: 1px solid purple;
     position: relative;
     display: flex;
     flex-direction: column;

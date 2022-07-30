@@ -17,9 +17,9 @@ const StyledHeaderButton = styled.div`
     }
 `
 
-export const HeaderButton = ({text, endpoint}) => (
+export const HeaderButton = ({text, endpoint, func}) => (
     <StyledHeaderButton>
-        <Link style={{ textDecoration: 'none' }} to={`/${endpoint}`}>
+        <Link onClick = {() => func()} style={{ textDecoration: 'none' }} to={`/${endpoint}`}>
                 {text}
         </Link>
     </StyledHeaderButton>

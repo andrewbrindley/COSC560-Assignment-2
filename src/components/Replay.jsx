@@ -11,7 +11,7 @@ import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDou
 import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
 
 const ReplayContainer = styled.div`
-    height: 75%;
+    height: 80%;
     width: 20%;
     border: 1px solid black;
     margin-left: 2%;

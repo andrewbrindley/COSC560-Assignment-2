@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { GomokuTag } from "./GomokuTag";
 import { HeaderButton } from "./HeaderButton";
@@ -12,12 +13,16 @@ const StyledHeader = styled.div`
     > * {
         text-decoration: none;
     }
-`
+`;
 
-export const Header = ({isLoggedIn}) => (
+export const Header = ({isLoggedIn, logOut}) => (
         <StyledHeader> 
             <GomokuTag/>
-            <HeaderButton text={'Login'} endpoint={'login'}/>
-            <HeaderButton text={'Previous Games'} endpoint = {'games'}/>
+            {isLoggedIn ? 
+                <React.Fragment>
+                    <HeaderButton text={'Previous Games'} endpoint = {'games'}/>
+                    <HeaderButton func = {logOut} text={'Logout'} endpoint = {''}/>
+                </React.Fragment> 
+                : <HeaderButton text={'Login'} endpoint={'login'}/>}
         </StyledHeader>
     )

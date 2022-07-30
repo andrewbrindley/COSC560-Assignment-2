@@ -20,7 +20,7 @@ const StyledGomokuTag = styled.div`
 export const GomokuTag = () => (
     <StyledGomokuTag>
         <span>
-        <Link  style={{ textDecoration: 'none' }} to="/">Gomoku</Link>
+            <Link style={{ textDecoration: 'none' }} to="/">Gomoku</Link>
         </span>
     </StyledGomokuTag>
 )

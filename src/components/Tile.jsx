@@ -28,7 +28,7 @@ const StyledTile = styled.div`
         align-items: center;
         text-align: center;
         > span{
-            font-size: 1vw;
+            font-size: 0.6vw;
             display: inline-block;
             vertical-align: middle;
             line-height: normal;
