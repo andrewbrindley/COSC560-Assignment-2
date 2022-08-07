@@ -62,7 +62,6 @@ const App = () => {
 
 
     const logout = () => {
-        console.log('Log out');
         updateUsername('');
         updatePassword('');
         updateLoggedIn(false);
@@ -124,6 +123,8 @@ const App = () => {
     const turn = getTurn(grid);
     const isDraw = grid.every(x => x > -1) && !paths.length;
     const winner = (!gameOver || isDraw) ? -1 : (turn + 1) % 2;
+
+    console.log(loggedIn);
 
     return (
         <StyledScreen>
