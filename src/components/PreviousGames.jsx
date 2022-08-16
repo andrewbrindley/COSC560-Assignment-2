@@ -15,10 +15,12 @@ const StyledContainer = styled.div`
 const StyledPreviousGames = styled.div`
     width: 75%;
     height: 85%;
+    max-height: 85%;
     border: 1px solid black;
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
 `;
 
 export const PreviousGames = () => {
