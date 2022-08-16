@@ -23,13 +23,19 @@ const StyledPreviousGames = styled.div`
     overflow-y: scroll;
 `;
 
-export const PreviousGames = () => {
-
+const notLoggedIn = () => {
     return (
         <StyledContainer>
-            <StyledPreviousGames>
-                {Object.entries(localStorage).sort((a, b) => +a[0] - +b[0]).map(game => <PreviousGame game={game}/>)}
-            </StyledPreviousGames>
+            {'You must be logged in to view this page.'}
         </StyledContainer>
     )
+}
+
+export const PreviousGames = ({loggedIn}) => {
+
+    return !loggedIn ? notLoggedIn() : <StyledContainer>
+                                            <StyledPreviousGames>
+                                                {Object.entries(localStorage).sort((a, b) => +a[0] - +b[0]).map(game => <PreviousGame game={game}/>)}
+                                            </StyledPreviousGames>
+                                        </StyledContainer>
 }

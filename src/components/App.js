@@ -164,7 +164,7 @@ const App = () => {
                     }/>
                     <Route path="/games" element=
                     {
-                    <PreviousGames/>
+                    <PreviousGames loggedIn={loggedIn}/>
                     }/>
                     <Route path="/game-log:id" element=
                     {
